@@ -39,11 +39,15 @@ describe('Todo List test', () => {
         expect(todoApp.getTodoById(0)?.content).toEqual(NEW_TODO_CONTENT)
     });
 
-    it('should delet todo', () => {
-        let NEW_TODO_CONTENT = 'hiiii';
+    function given_todo_list(todoInputs: string[] = ['hi', 'ho']) {
         todoApp = new TodoApp([]);
-        todoApp.addTodo('hi')
-        todoApp.addTodo('ho');
+        for (let i = 0; i < todoInputs.length; i++) {
+            todoApp.addTodo(todoInputs[i])
+        }
+    }
+
+    it('should delet todo', () => {
+        given_todo_list();
 
         todoApp.removeTodo(1)
         expect(todoApp.getTodos()).toEqual([ {
