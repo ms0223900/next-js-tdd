@@ -18,11 +18,17 @@ export class TodoApp {
     }
 
     checkTodo(id: number) {
-        const foundTodo = this.todoList.find(todo => todo.id === id);
+        const foundTodo = this.getTodoById(id);
         if (foundTodo) {
             foundTodo.checked = !foundTodo.checked
         }
     }
+
+    getTodoById(id: number) {
+        const foundTodo = this.todoList.find(todo => todo.id === id);
+        return foundTodo;
+    }
+
 }
 
 interface Todo {

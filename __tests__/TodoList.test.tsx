@@ -17,7 +17,10 @@ describe('Todo List test', () => {
     it('should check todo', () => {
         todoApp = new TodoApp([]);
         todoApp.addTodo('hi')
+        expect(todoApp.getTodoById(0)?.checked).toBeFalsy()
+
         todoApp.checkTodo(0)
+        expect(todoApp.getTodoById(0)?.checked).toBeTruthy()
     });
 
 
