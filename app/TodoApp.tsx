@@ -36,6 +36,14 @@ export class TodoApp {
         }
 
     }
+
+    removeTodo(id: number) {
+        const foundIdx = this.todoList.findIndex(todo => todo.id === id);
+        this.todoList = [
+            ...this.todoList.slice(0, foundIdx),
+            ...this.todoList.slice(foundIdx + 1),
+        ]
+    }
 }
 
 interface Todo {

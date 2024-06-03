@@ -39,5 +39,20 @@ describe('Todo List test', () => {
         expect(todoApp.getTodoById(0)?.content).toEqual(NEW_TODO_CONTENT)
     });
 
+    it('should delet todo', () => {
+        let NEW_TODO_CONTENT = 'hiiii';
+        todoApp = new TodoApp([]);
+        todoApp.addTodo('hi')
+        todoApp.addTodo('ho');
+
+        todoApp.removeTodo(1)
+        expect(todoApp.getTodos()).toEqual([ {
+            id: 0,
+            checked: false,
+            content: 'hi'
+        } ])
+    });
+
+
 
 })
