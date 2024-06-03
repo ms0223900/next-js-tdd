@@ -15,8 +15,8 @@ describe('Todo List test', () => {
     });
 
     it('should check todo', () => {
-        todoApp = new TodoApp([]);
-        todoApp.addTodo('hi')
+        given_add_todos('hi')
+
         expect(todoApp.getTodoById(0)?.checked).toBeFalsy()
 
         todoApp.checkTodo(0)
@@ -26,11 +26,14 @@ describe('Todo List test', () => {
         expect(todoApp.getTodoById(0)?.checked).toBeFalsy()
     });
 
+    function given_add_todos(todoInput: string = 'hi') {
+        todoApp = new TodoApp([]);
+        todoApp.addTodo(todoInput)
+    }
+
     it('should edit todo', () => {
         let NEW_TODO_CONTENT = 'hiiii';
-
-        todoApp = new TodoApp([]);
-        todoApp.addTodo('hi')
+        given_add_todos();
 
         todoApp.editTodo(0, NEW_TODO_CONTENT)
         expect(todoApp.getTodoById(0)?.content).toEqual(NEW_TODO_CONTENT)
