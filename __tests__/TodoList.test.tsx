@@ -1,26 +1,4 @@
-interface Todo {
-    checked: boolean
-    content: string
-}
-
-class TodoApp {
-    todoList: Todo[]
-
-    constructor(todoList: Todo[]) {
-        this.todoList = todoList;
-    }
-
-    getTodos() {
-        return this.todoList;
-    }
-
-    addTodo(input: string) {
-        this.todoList.push({
-            checked: false,
-            content: input
-        })
-    }
-}
+import { TodoApp } from "./TodoApp";
 
 describe('Todo List test', () => {
     let todoApp: TodoApp;
