@@ -46,7 +46,7 @@ describe('Todo List test', () => {
         }
     }
 
-    it('should delet todo', () => {
+    it('should remove todo', () => {
         given_todo_list();
 
         todoApp.removeTodo(1)
