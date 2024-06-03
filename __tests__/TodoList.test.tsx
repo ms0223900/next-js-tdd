@@ -34,7 +34,7 @@ describe('Todo List test', () => {
         expect(todoApp.getTodoById(0)?.content).toEqual(NEW_TODO_CONTENT)
     });
 
-    function given_todo_list(todoInputs: string[] = ['hi', 'ho']) {
+    function given_todo_list(todoInputs: string[]) {
         todoApp = new TodoApp([]);
         for (let i = 0; i < todoInputs.length; i++) {
             todoApp.addTodo(todoInputs[i])
@@ -42,16 +42,15 @@ describe('Todo List test', () => {
     }
 
     it('should remove todo', () => {
-        given_todo_list();
+        given_todo_list(['hi', 'ho']);
 
         todoApp.removeTodo(1)
-        expect(todoApp.getTodos()).toEqual([ {
+        expect(todoApp.getTodos()).toEqual([{
             id: 0,
             checked: false,
             content: 'hi'
-        } ])
+        }])
     });
-
 
 
 })
