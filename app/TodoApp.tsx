@@ -29,6 +29,13 @@ export class TodoApp {
         return foundTodo;
     }
 
+    editTodo(id: number, content: string) {
+        const todoById = this.getTodoById(id);
+        if (todoById) {
+            todoById.content = content
+        }
+
+    }
 }
 
 interface Todo {
