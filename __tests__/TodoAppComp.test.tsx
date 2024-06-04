@@ -38,7 +38,6 @@ function TodoListApp() {
             <button data-testid={"addButton"} onClick={handleAddTodo}>Add Todo</button>
         </div>
     );
-    return null;
 }
 
 describe('Todo App component tests', () => {
