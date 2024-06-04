@@ -7,14 +7,23 @@ function TodoListApp() {
     const [content, setContent] = useState("");
     const [todoList, setTodoList] = useState<Todo[]>([]);
 
+    function updateTodoToState() {
+        setTodoList(todoAppRef.current.getTodos())
+    }
+
     function handleAddTodo() {
         todoAppRef.current.addTodo(content)
-        setTodoList(todoAppRef.current.getTodos())
+        updateTodoToState();
     }
 
     function handleRemoveTodo(id: number) {
         todoAppRef.current.removeTodo(id)
-        setTodoList(todoAppRef.current.getTodos())
+        updateTodoToState();
+    }
+
+    function handleToggleTodo(id: number) {
+        todoAppRef.current.checkTodo(id)
+        updateTodoToState()
     }
 
     return (
@@ -25,6 +34,8 @@ function TodoListApp() {
             <ul>
                 {todoList.map(todo => (
                     <div>
+                        <input data-testid={"todoCheckbox"} checked={todo.checked}
+                               onChange={(e) => handleToggleTodo(todo.id)} />
                         <li key={todo.id} data-testid={"todo"}>
                             {todo.content}
                         </li>
@@ -120,6 +131,25 @@ describe('Todo App component tests', () => {
         fireEvent.click(deleteTodoBtn[1])
 
         await waitFor(async () => {
+            expect(await screen.findAllByTestId('todo')).toHaveLength(1)
+        })
+    })
+
+    it('should toggle check todo', async () => {
+        await givenRender()
+
+        await givenInput('hi');
+        await whenClickAddButton();
+
+        const todoCheckboxes = await screen.findAllByTestId('todoCheckbox');
+        fireEvent.change(todoCheckboxes[0], {
+            target: {
+                checked: true,
+            }
+        })
+
+        await waitFor(async () => {
+            expect((todoCheckboxes[0] as HTMLInputElement).checked).toBeTruthy()
             expect(await screen.findAllByTestId('todo')).toHaveLength(1)
         })
     })
