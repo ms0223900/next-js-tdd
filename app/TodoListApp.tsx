@@ -33,7 +33,6 @@ export function TodoListApp() {
 
     function handleEditTodo(value: string) {
         setEditingContent(value)
-        console.log("value: ", value);
     }
 
     function handleConfirmEdit() {
