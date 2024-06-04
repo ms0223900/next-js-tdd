@@ -34,6 +34,27 @@ describe('Todo App component tests', () => {
         })
     })
 
+    it('should clear input after adding todo', async () => {
+        await givenRender()
+
+        const todoInput = await screen.findByTestId('todoInput');
+        fireEvent.input(todoInput, {
+            target: {
+                value: 'hi'
+            }
+        })
+
+        const addButton = await screen.findByTestId('addButton');
+        fireEvent.click(addButton)
+
+        await waitFor(() => {
+            expect(screen.getByTestId('todo')).toBeInTheDocument()
+            expect(( screen.getByTestId('todoInput') as HTMLInputElement ).value).toEqual('')
+        })
+    })
+
+
+
     async function givenInput(todoContent: string) {
         const todoInput = await screen.findByTestId('todoInput');
         fireEvent.change(todoInput, {

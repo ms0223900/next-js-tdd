@@ -16,6 +16,7 @@ export function TodoListApp() {
     function handleAddTodo() {
         todoAppRef.current.addTodo(content)
         updateTodoToState();
+        setContent("")
     }
 
     function handleRemoveTodo(id: number) {

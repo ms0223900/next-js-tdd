@@ -73,6 +73,18 @@ exports[`renders homepage unchanged 1`] = `
         </a>
       </div>
     </main>
+    <div>
+      <input
+        data-testid="todoInput"
+        value=""
+      />
+      <ul />
+      <button
+        data-testid="addButton"
+      >
+        Add Todo
+      </button>
+    </div>
     <footer
       class="footer"
     >
