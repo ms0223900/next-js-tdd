@@ -1,10 +1,30 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import React, { useRef, useState } from "react";
+import { Todo, TodoApp } from "../app/TodoApp";
 
-function TodoApp() {
+function TodoListApp() {
+    const todoAppRef = useRef<TodoApp>(new TodoApp([]));
+    const [content, setContent] = useState("");
+    const [todoList, setTodoList] = useState<Todo[]>([]);
+
+    function handleAddTodo() {
+        todoAppRef.current.addTodo(content)
+        setTodoList(todoAppRef.current.getTodos())
+    }
+
     return (
         <div>
-            <button data-testid={"addButton"}>Add Todo</button>
+            <input data-testid={"todoInput"}
+                   value={content}
+                   onChange={(e) => setContent(e.target.value)} />
+            <ul>
+                {todoList.map(todo => (
+                    <li key={todo.id} data-testid={"todo"}>
+                        {todo.content}
+                    </li>
+                ))}
+            </ul>
+            <button data-testid={"addButton"} onClick={handleAddTodo}>Add Todo</button>
         </div>
     );
     return null;
@@ -13,8 +33,30 @@ function TodoApp() {
 describe('Todo App component tests', () => {
     it('should render elements', async () => {
         render(
-            <TodoApp />
+            <TodoListApp />
         )
         expect(await screen.findByTestId('addButton')).toBeInTheDocument()
     })
+
+    it('should add todo', async () => {
+        render(
+            <TodoListApp />
+        )
+
+        const todoInput = await screen.findByTestId('todoInput');
+        fireEvent.input(todoInput, {
+            target: {
+                value: 'hi'
+            }
+        })
+
+        const addButton = await screen.findByTestId('addButton');
+        fireEvent.click(addButton)
+
+        await waitFor(() => {
+            expect(screen.getByTestId('todo')).toBeInTheDocument()
+        })
+    })
+
+
 })
