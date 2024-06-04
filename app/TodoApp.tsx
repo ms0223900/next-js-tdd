@@ -24,7 +24,7 @@ export class TodoApp {
     }
 
     getTodos() {
-        return this.todoList;
+        return [ ...this.todoList ];
     }
 
     addTodo(input: string) {

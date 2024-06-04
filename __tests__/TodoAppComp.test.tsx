@@ -64,7 +64,7 @@ describe('Todo App component tests', () => {
 
     async function givenInput(todoContent: string) {
         const todoInput = await screen.findByTestId('todoInput');
-        fireEvent.input(todoInput, {
+        fireEvent.change(todoInput, {
             target: {
                 value: todoContent
             }
@@ -80,12 +80,16 @@ describe('Todo App component tests', () => {
         await givenRender()
 
         await givenInput('hi');
-
         await whenClickAddButton();
 
-        await waitFor(() => {
-            expect(screen.getByTestId('todo')).toBeInTheDocument()
-            expect(screen.getByTestId('todo').innerHTML).toEqual('hi')
+        await givenInput('hey');
+        await whenClickAddButton();
+
+        await givenInput('hooo');
+        await whenClickAddButton();
+
+        await waitFor(async () => {
+            expect(await screen.findAllByTestId('todo')).toHaveLength(3)
         })
     })
 
