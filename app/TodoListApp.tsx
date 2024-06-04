@@ -1,3 +1,4 @@
+'use client'
 import React, { useRef, useState } from "react";
 import { Todo, TodoApp } from "./TodoApp";
 
@@ -51,8 +52,11 @@ export function TodoListApp() {
                    onChange={(e) => setContent(e.target.value)} />
             <ul>
                 {todoList.map(todo => (
-                    <div key={todo.id}>
-                        <input data-testid={"todoCheckbox"} checked={todo.checked}
+                    <div key={todo.id} style={{
+                        display: 'flex',
+                        gap: '.5rem'
+                    }}>
+                        <input type={"checkbox"} data-testid={"todoCheckbox"} checked={todo.checked}
                                onChange={(e) => handleToggleTodo(todo.id)} />
                         {editingTodo === todo.id ? (
                                 <div>

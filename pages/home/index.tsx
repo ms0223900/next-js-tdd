@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/pages/index.module.css";
+import { TodoListApp } from "../../app/TodoListApp";
 
 export default function Home() {
   return (
@@ -46,6 +47,7 @@ export default function Home() {
           </a>
         </div>
       </main>
+      <TodoListApp />
 
       <footer className={styles.footer}>
         <a
