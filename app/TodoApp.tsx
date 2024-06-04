@@ -1,7 +1,7 @@
 export class TodoApp {
-    todoList: ITodo[]
+    todoList: Todo[]
 
-    constructor(todoList: ITodo[]) {
+    constructor(todoList: Todo[]) {
         this.todoList = todoList;
     }
 
@@ -10,11 +10,11 @@ export class TodoApp {
     }
 
     addTodo(input: string) {
-        this.todoList.push({
+        this.todoList.push(new Todo({
             id: this.todoList.length,
             checked: false,
             content: input
-        })
+        }))
     }
 
     checkTodo(id: number) {
@@ -46,21 +46,38 @@ export class TodoApp {
     }
 }
 
-interface ITodo {
-    id: number;
-    checked: boolean
-    content: string
-}
-
 export class Todo {
-    private checked: boolean;
-    private id: number;
-    private content: string;
+    private _checked: boolean;
+    private _id: number;
+    private _content: string;
 
     constructor({ checked, id, content }: { checked: boolean; id: number; content: string }) {
-        this.checked = checked
-        this.id = id
-        this.content = content
+        this._checked = checked
+        this._id = id
+        this._content = content
     }
 
+    get checked(): boolean {
+        return this._checked;
+    }
+
+    get id(): number {
+        return this._id;
+    }
+
+    get content(): string {
+        return this._content;
+    }
+
+    set checked(value: boolean) {
+        this._checked = value;
+    }
+
+    set id(value: number) {
+        this._id = value;
+    }
+
+    set content(value: string) {
+        this._content = value;
+    }
 }

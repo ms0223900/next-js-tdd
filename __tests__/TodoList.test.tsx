@@ -46,11 +46,11 @@ describe('Todo List test', () => {
         given_todo_list(['hi', 'ho']);
 
         todoApp.removeTodo(1)
-        expect(todoApp.getTodos()).toEqual([{
+        expect(todoApp.getTodos()).toEqual([new Todo( {
             id: 0,
             checked: false,
             content: 'hi'
-        }])
+        } )])
     });
 
 
