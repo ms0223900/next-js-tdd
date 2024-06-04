@@ -31,17 +31,17 @@ function TodoListApp() {
 }
 
 describe('Todo App component tests', () => {
-    it('should render elements', async () => {
-        givenRender()
-
-        expect(await screen.findByTestId('addButton')).toBeInTheDocument()
-    })
-
     function givenRender() {
         render(
             <TodoListApp />
         )
     }
+
+    it('should render elements', async () => {
+        givenRender()
+
+        expect(await screen.findByTestId('addButton')).toBeInTheDocument()
+    })
 
     it('should add todo', async () => {
         givenRender();
@@ -58,6 +58,7 @@ describe('Todo App component tests', () => {
 
         await waitFor(() => {
             expect(screen.getByTestId('todo')).toBeInTheDocument()
+            expect(screen.getByTestId('todo').innerHTML).toEqual('hi')
         })
     })
 
