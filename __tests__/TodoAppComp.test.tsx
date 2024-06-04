@@ -32,16 +32,19 @@ function TodoListApp() {
 
 describe('Todo App component tests', () => {
     it('should render elements', async () => {
-        render(
-            <TodoListApp />
-        )
+        givenRender()
+
         expect(await screen.findByTestId('addButton')).toBeInTheDocument()
     })
 
-    it('should add todo', async () => {
+    function givenRender() {
         render(
             <TodoListApp />
         )
+    }
+
+    it('should add todo', async () => {
+        givenRender();
 
         const todoInput = await screen.findByTestId('todoInput');
         fireEvent.input(todoInput, {
