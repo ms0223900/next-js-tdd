@@ -4,7 +4,9 @@ import { Todo, TodoApp } from "./TodoApp";
 export function TodoListApp() {
     const todoAppRef = useRef<TodoApp>(new TodoApp([]));
     const [content, setContent] = useState("");
+    const [editingContent, setEditingContent] = useState("");
     const [todoList, setTodoList] = useState<Todo[]>([]);
+    const [editingTodo, setEditingTodo] = useState<Todo['id']>();
 
     function updateTodoToState() {
         setTodoList(todoAppRef.current.getTodos())
@@ -25,6 +27,24 @@ export function TodoListApp() {
         updateTodoToState()
     }
 
+    function handleToggleEditTodo(id: number) {
+        setEditingTodo(id)
+    }
+
+    function handleEditTodo(value: string) {
+        setEditingContent(value)
+        console.log("value: ", value);
+    }
+
+    function handleConfirmEdit() {
+        if (typeof editingTodo !== 'number') return
+        todoAppRef.current.editTodo(editingTodo, editingContent)
+        updateTodoToState()
+
+        setEditingTodo(undefined)
+        setEditingContent('')
+    }
+
     return (
         <div>
             <input data-testid={"todoInput"}
@@ -32,12 +52,20 @@ export function TodoListApp() {
                    onChange={(e) => setContent(e.target.value)} />
             <ul>
                 {todoList.map(todo => (
-                    <div>
+                    <div key={todo.id}>
                         <input data-testid={"todoCheckbox"} checked={todo.checked}
                                onChange={(e) => handleToggleTodo(todo.id)} />
-                        <li key={todo.id} data-testid={"todo"}>
-                            {todo.content}
-                        </li>
+                        {editingTodo === todo.id ? (
+                                <div>
+                                    <input data-testid={"todoContentInput"}
+                                           onChange={e => handleEditTodo(e.target.value)} />
+                                    <button data-testid={"confirmEditBtn"} onClick={handleConfirmEdit}>OK</button>
+                                </div>
+                            ) :
+                            <li key={todo.id} data-testid={"todo"} onDoubleClick={() => handleToggleEditTodo(todo.id)}>
+                                {todo.content}
+                            </li>
+                        }
                         <button data-testid={"deleteTodoBtn"}
                                 onClick={() => handleRemoveTodo(todo.id)}>
                             Delete

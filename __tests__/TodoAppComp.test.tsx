@@ -105,5 +105,29 @@ describe('Todo App component tests', () => {
         })
     })
 
+    it('should edit todo content', async () => {
+        await givenRender()
+
+        await givenInput('hi');
+        await whenClickAddButton();
+
+        const todoEL = await screen.findByTestId('todo');
+        fireEvent.dblClick(todoEL)
+
+        const todoContentInput = await screen.findByTestId('todoContentInput');
+        fireEvent.change(todoContentInput, {
+            target: {
+                value: 'heyyyyyy'
+            }
+        })
+        const confirmEditBtn = await screen.findByTestId('confirmEditBtn');
+        fireEvent.click(confirmEditBtn)
+
+        await waitFor(async () => {
+            expect(await screen.findByTestId('todo')).toHaveTextContent('heyyyyyy')
+        })
+    })
+
+
 
 })
