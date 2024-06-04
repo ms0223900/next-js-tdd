@@ -12,7 +12,7 @@ function TodoListApp() {
         setTodoList(todoAppRef.current.getTodos())
     }
 
-    function handleDeleteTodo(id: number) {
+    function handleRemoveTodo(id: number) {
         todoAppRef.current.removeTodo(id)
         setTodoList(todoAppRef.current.getTodos())
     }
@@ -29,7 +29,7 @@ function TodoListApp() {
                             {todo.content}
                         </li>
                         <button data-testid={"deleteTodoBtn"}
-                                onClick={() => handleDeleteTodo(todo.id)}>
+                                onClick={() => handleRemoveTodo(todo.id)}>
                             Delete
                         </button>
                     </div>
