@@ -47,10 +47,7 @@ export class TodoApp {
 
     editTodo(id: number, content: string) {
         const todoById = this.getTodoById(id);
-        if (todoById) {
-            todoById.content = content
-        }
-
+        todoById?.updateContent(content)
     }
 
     removeTodo(id: number) {
@@ -99,5 +96,9 @@ export class Todo {
 
     toggleChecked() {
         this._checked = !this._checked
+    }
+
+    updateContent(content: string) {
+        this._content = content
     }
 }
