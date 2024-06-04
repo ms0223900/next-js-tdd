@@ -18,9 +18,9 @@ export class TodoApp {
     private latestId: number = 0;
     private idGenerator: IdGenerator;
 
-    constructor(todoList: Todo[]) {
+    constructor(todoList: Todo[], idGenerator: IdGenerator = new IdGeneratorImpl()) {
         this.todoList = todoList;
-        this.idGenerator = new IdGeneratorImpl()
+        this.idGenerator = idGenerator
     }
 
     getTodos() {
