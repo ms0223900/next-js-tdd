@@ -12,6 +12,11 @@ function TodoListApp() {
         setTodoList(todoAppRef.current.getTodos())
     }
 
+    function handleDeleteTodo(id: number) {
+        todoAppRef.current.removeTodo(id)
+        setTodoList(todoAppRef.current.getTodos())
+    }
+
     return (
         <div>
             <input data-testid={"todoInput"}
@@ -19,9 +24,12 @@ function TodoListApp() {
                    onChange={(e) => setContent(e.target.value)} />
             <ul>
                 {todoList.map(todo => (
-                    <li key={todo.id} data-testid={"todo"}>
-                        {todo.content}
-                    </li>
+                    <div>
+                        <li key={todo.id} data-testid={"todo"}>
+                            {todo.content}
+                        </li>
+                        <button data-testid={"deleteTodoBtn"} onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+                    </div>
                 ))}
             </ul>
             <button data-testid={"addButton"} onClick={handleAddTodo}>Add Todo</button>
@@ -93,6 +101,26 @@ describe('Todo App component tests', () => {
         })
     })
 
+    it('should delete todo', async () => {
+        await givenRender()
+
+        await givenInput('hi');
+        await whenClickAddButton();
+
+        await givenInput('hooo');
+        await whenClickAddButton();
+
+        await waitFor(async () => {
+            expect(await screen.findAllByTestId('todo')).toHaveLength(2)
+        })
+
+        const deleteTodoBtn = await screen.findAllByTestId('deleteTodoBtn');
+        fireEvent.click(deleteTodoBtn[1])
+
+        await waitFor(async () => {
+            expect(await screen.findAllByTestId('todo')).toHaveLength(1)
+        })
+    })
 
 
 })
