@@ -1,5 +1,6 @@
 export class TodoApp {
     todoList: Todo[]
+    private latestId: number = 0;
 
     constructor(todoList: Todo[]) {
         this.todoList = todoList;
@@ -11,10 +12,15 @@ export class TodoApp {
 
     addTodo(input: string) {
         this.todoList.push(new Todo({
-            id: this.todoList.length,
+            id: this.getId(),
             checked: false,
             content: input
         }))
+        this.latestId++
+    }
+
+    private getId() {
+        return this.latestId
     }
 
     checkTodo(id: number) {

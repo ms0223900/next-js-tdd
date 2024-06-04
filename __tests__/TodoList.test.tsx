@@ -46,11 +46,28 @@ describe('Todo List test', () => {
         given_todo_list(['hi', 'ho']);
 
         todoApp.removeTodo(1)
-        expect(todoApp.getTodos()).toEqual([new Todo( {
+        expect(todoApp.getTodos()).toEqual([new Todo({
             id: 0,
             checked: false,
             content: 'hi'
-        } )])
+        })])
+    });
+
+    it('should remove todo, add todo, edit todo correctly.', () => {
+        given_todo_list(['hi', 'ho']);
+
+        todoApp.removeTodo(1)
+        expect(todoApp.getTodos()).toEqual([
+            new Todo({
+                id: 0,
+                checked: false,
+                content: 'hi'
+            }),
+        ])
+
+        todoApp.addTodo('fooo')
+        todoApp.editTodo(2, 'bar')
+        expect(todoApp.getTodoById(2)?.content).toEqual('bar')
     });
 
 
