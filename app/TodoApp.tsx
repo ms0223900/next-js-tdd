@@ -33,18 +33,11 @@ export class TodoApp {
             checked: false,
             content: input
         }))
-
-    }
-
-    private getId() {
-        return this.latestId
     }
 
     checkTodo(id: number) {
         const foundTodo = this.getTodoById(id);
-        if (foundTodo) {
-            foundTodo.checked = !foundTodo.checked
-        }
+        foundTodo?.toggleChecked()
     }
 
     getTodoById(id: number) {
@@ -102,5 +95,9 @@ export class Todo {
 
     set content(value: string) {
         this._content = value;
+    }
+
+    toggleChecked() {
+        this._checked = !this._checked
     }
 }
