@@ -1,7 +1,7 @@
 export class TodoApp {
-    todoList: Todo[]
+    todoList: ITodo[]
 
-    constructor(todoList: Todo[]) {
+    constructor(todoList: ITodo[]) {
         this.todoList = todoList;
     }
 
@@ -46,8 +46,21 @@ export class TodoApp {
     }
 }
 
-interface Todo {
+interface ITodo {
     id: number;
     checked: boolean
     content: string
+}
+
+export class Todo {
+    private checked: boolean;
+    private id: number;
+    private content: string;
+
+    constructor({ checked, id, content }: { checked: boolean; id: number; content: string }) {
+        this.checked = checked
+        this.id = id
+        this.content = content
+    }
+
 }

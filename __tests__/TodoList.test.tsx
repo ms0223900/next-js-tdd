@@ -1,4 +1,4 @@
-import { TodoApp } from "../app/TodoApp";
+import { Todo, TodoApp } from "../app/TodoApp";
 
 describe('Todo List test', () => {
     let todoApp: TodoApp;
@@ -7,11 +7,12 @@ describe('Todo List test', () => {
         todoApp = new TodoApp([]);
         todoApp.addTodo('hi')
         expect(todoApp.getTodos()).toHaveLength(1)
-        expect(todoApp.getTodos()[0]).toEqual({
+        const todo = new Todo({
             id: 0,
             checked: false,
             content: 'hi'
-        })
+        });
+        expect(todoApp.getTodos()[0]).toEqual(todo)
     });
 
     it('should check todo', () => {
