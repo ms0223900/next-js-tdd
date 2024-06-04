@@ -28,7 +28,10 @@ function TodoListApp() {
                         <li key={todo.id} data-testid={"todo"}>
                             {todo.content}
                         </li>
-                        <button data-testid={"deleteTodoBtn"} onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+                        <button data-testid={"deleteTodoBtn"}
+                                onClick={() => handleDeleteTodo(todo.id)}>
+                            Delete
+                        </button>
                     </div>
                 ))}
             </ul>
