@@ -1,9 +1,26 @@
+interface IdGenerator {
+    getId: () => number
+}
+
+
+class IdGeneratorImpl implements IdGenerator {
+    private id = 0;
+
+    getId() {
+        const id = this.id;
+        this.id++
+        return id;
+    }
+}
+
 export class TodoApp {
     todoList: Todo[]
     private latestId: number = 0;
+    private idGenerator: IdGenerator;
 
     constructor(todoList: Todo[]) {
         this.todoList = todoList;
+        this.idGenerator = new IdGeneratorImpl()
     }
 
     getTodos() {
@@ -12,11 +29,11 @@ export class TodoApp {
 
     addTodo(input: string) {
         this.todoList.push(new Todo({
-            id: this.getId(),
+            id: this.idGenerator.getId(),
             checked: false,
             content: input
         }))
-        this.latestId++
+
     }
 
     private getId() {
