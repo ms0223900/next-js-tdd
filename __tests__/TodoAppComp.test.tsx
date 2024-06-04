@@ -31,20 +31,20 @@ function TodoListApp() {
 }
 
 describe('Todo App component tests', () => {
-    function givenRender() {
-        render(
+    async function givenRender() {
+        await render(
             <TodoListApp />
         )
     }
 
     it('should render elements', async () => {
-        givenRender()
+        await givenRender()
 
         expect(await screen.findByTestId('addButton')).toBeInTheDocument()
     })
 
     it('should add todo', async () => {
-        givenRender();
+        await givenRender()
 
         const todoInput = await screen.findByTestId('todoInput');
         fireEvent.input(todoInput, {
@@ -61,6 +61,34 @@ describe('Todo App component tests', () => {
             expect(screen.getByTestId('todo').innerHTML).toEqual('hi')
         })
     })
+
+    async function givenInput(todoContent: string) {
+        const todoInput = await screen.findByTestId('todoInput');
+        fireEvent.input(todoInput, {
+            target: {
+                value: todoContent
+            }
+        })
+    }
+
+    async function whenClickAddButton() {
+        const addButton = await screen.findByTestId('addButton');
+        fireEvent.click(addButton)
+    }
+
+    it('should add several todos', async () => {
+        await givenRender()
+
+        await givenInput('hi');
+
+        await whenClickAddButton();
+
+        await waitFor(() => {
+            expect(screen.getByTestId('todo')).toBeInTheDocument()
+            expect(screen.getByTestId('todo').innerHTML).toEqual('hi')
+        })
+    })
+
 
 
 })
