@@ -9,24 +9,24 @@ export function TodoListApp() {
     const [todoList, setTodoList] = useState<Todo[]>([]);
     const [editingTodo, setEditingTodo] = useState<Todo['id']>();
 
-    function updateTodoToState() {
+    function updateToState() {
         setTodoList(todoAppRef.current.getTodos())
     }
 
     function handleAddTodo() {
         todoAppRef.current.addTodo(content)
-        updateTodoToState();
+        updateToState();
         setContent("")
     }
 
     function handleRemoveTodo(id: number) {
         todoAppRef.current.removeTodo(id)
-        updateTodoToState();
+        updateToState();
     }
 
     function handleToggleTodo(id: number) {
         todoAppRef.current.checkTodo(id)
-        updateTodoToState()
+        updateToState()
     }
 
     function handleToggleEditTodo(id: number) {
@@ -40,7 +40,7 @@ export function TodoListApp() {
     function handleConfirmEdit() {
         if (typeof editingTodo !== 'number') return
         todoAppRef.current.editTodo(editingTodo, editingContent)
-        updateTodoToState()
+        updateToState()
 
         setEditingTodo(undefined)
         setEditingContent('')
