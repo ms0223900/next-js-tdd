@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/pages/index.module.css";
-import { TodoListApp } from "../../app/TodoListApp";
+import { TodoListApp } from "../../app/todoApp/TodoListApp";
 
 export default function Home() {
   return (

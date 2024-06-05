@@ -1,4 +1,4 @@
-import { Todo, TodoApp } from "../app/TodoApp";
+import { Todo, TodoApp } from "./TodoApp";
 
 describe('Todo List test', () => {
     let todoApp: TodoApp;

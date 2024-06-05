@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
-import { TodoListApp } from "../app/TodoListApp";
+import { TodoListApp } from "./TodoListApp";
 
 describe('Todo App component tests', () => {
     async function givenRender() {
