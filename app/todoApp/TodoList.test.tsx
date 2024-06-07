@@ -1,13 +1,5 @@
-import { IdGeneratorImpl, Todo, TodoApp } from "./TodoApp";
+import { IdGeneratorImpl, Todo, TodoApp, TodoDto, TodoRepoImpl } from "./TodoApp";
 
-interface TodoDto {
-}
-
-export class TodoRepoImpl {
-    async getTodos(): Promise<TodoDto[]> {
-        return [];
-    }
-}
 
 describe('Todo List test', () => {
     let todoApp: TodoApp;
@@ -79,9 +71,17 @@ describe('Todo List test', () => {
         expect(todoApp.getTodoById(2)?.content).toEqual('bar')
     });
 
-    xit('should sync todo data from resources.', async () => {
-        jest.spyOn(TodoRepoImpl.prototype, 'getTodos').mockResolvedValueOnce([])
+    it('should sync todo data from resources.', async () => {
+        jest.spyOn(TodoRepoImpl.prototype, 'getTodos').mockResolvedValueOnce([
+            new Todo({
+                id: 0,
+                checked: false,
+                content: 'hi'
+            })
+        ])
         todoApp = new TodoApp([], new IdGeneratorImpl(), new TodoRepoImpl());
+        expect(todoApp.getTodos()).toHaveLength(0)
+
         await todoApp.syncData()
 
         expect(todoApp.getTodos()).toEqual([

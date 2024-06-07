@@ -1,5 +1,3 @@
-import { TodoRepoImpl } from "./TodoList.test";
-
 interface IdGenerator {
     getId: () => number
 }
@@ -15,18 +13,44 @@ export class IdGeneratorImpl implements IdGenerator {
     }
 }
 
+interface TodoRepo {
+    getTodos: () => Promise<Todo[]>
+}
+
+export class TodoDto {
+    id: number
+    checked: boolean
+    content: string
+
+    constructor({
+                    id, checked, content
+                }: { id: number, checked: boolean, content: string }) {
+        this.id = id;
+        this.checked = checked;
+        this.content = content;
+    }
+}
+
+export class TodoRepoImpl implements TodoRepo {
+    async getTodos(): Promise<Todo[]> {
+        return Promise.resolve([]);
+    }
+}
+
 export class TodoApp {
     todoList: Todo[]
     private latestId: number = 0;
     private idGenerator: IdGenerator;
+    private todoRepo: TodoRepo;
 
     constructor(todoList: Todo[], idGenerator: IdGenerator = new IdGeneratorImpl(), todoRepo = new TodoRepoImpl()) {
         this.todoList = todoList;
         this.idGenerator = idGenerator
+        this.todoRepo = todoRepo
     }
 
     getTodos() {
-        return [ ...this.todoList ];
+        return [...this.todoList];
     }
 
     addTodo(input: string) {
@@ -60,8 +84,9 @@ export class TodoApp {
         ]
     }
 
-    syncData() {
-
+    async syncData() {
+        const todos = await this.todoRepo.getTodos();
+        this.todoList = [...todos]
     }
 }
 
