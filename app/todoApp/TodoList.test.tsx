@@ -1,10 +1,19 @@
-import { Todo, TodoApp } from "./TodoApp";
+import { IdGeneratorImpl, Todo, TodoApp } from "./TodoApp";
+
+interface TodoDto {
+}
+
+export class TodoRepoImpl {
+    async getTodos(): Promise<TodoDto[]> {
+        return [];
+    }
+}
 
 describe('Todo List test', () => {
     let todoApp: TodoApp;
 
     it('should add todo', () => {
-        todoApp = new TodoApp([]);
+        todoApp = new TodoApp([], new IdGeneratorImpl(), new TodoRepoImpl());
         todoApp.addTodo('hi')
         expect(todoApp.getTodos()).toHaveLength(1)
         const todo = new Todo({
@@ -36,7 +45,7 @@ describe('Todo List test', () => {
     });
 
     function given_todo_list(todoInputs: string[]) {
-        todoApp = new TodoApp([]);
+        todoApp = new TodoApp([], new IdGeneratorImpl(), new TodoRepoImpl());
         for (let i = 0; i < todoInputs.length; i++) {
             todoApp.addTodo(todoInputs[i])
         }
@@ -70,5 +79,18 @@ describe('Todo List test', () => {
         expect(todoApp.getTodoById(2)?.content).toEqual('bar')
     });
 
+    xit('should sync todo data from resources.', async () => {
+        jest.spyOn(TodoRepoImpl.prototype, 'getTodos').mockResolvedValueOnce([])
+        todoApp = new TodoApp([], new IdGeneratorImpl(), new TodoRepoImpl());
+        await todoApp.syncData()
 
+        expect(todoApp.getTodos()).toEqual([
+            new Todo({
+                id: 0,
+                checked: false,
+                content: 'hi'
+            }),
+        ])
+
+    });
 })

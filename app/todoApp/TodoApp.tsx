@@ -1,9 +1,11 @@
+import { TodoRepoImpl } from "./TodoList.test";
+
 interface IdGenerator {
     getId: () => number
 }
 
 
-class IdGeneratorImpl implements IdGenerator {
+export class IdGeneratorImpl implements IdGenerator {
     private id = 0;
 
     getId() {
@@ -18,7 +20,7 @@ export class TodoApp {
     private latestId: number = 0;
     private idGenerator: IdGenerator;
 
-    constructor(todoList: Todo[], idGenerator: IdGenerator = new IdGeneratorImpl()) {
+    constructor(todoList: Todo[], idGenerator: IdGenerator = new IdGeneratorImpl(), todoRepo = new TodoRepoImpl()) {
         this.todoList = todoList;
         this.idGenerator = idGenerator
     }
@@ -56,6 +58,10 @@ export class TodoApp {
             ...this.todoList.slice(0, foundIdx),
             ...this.todoList.slice(foundIdx + 1),
         ]
+    }
+
+    syncData() {
+
     }
 }
 

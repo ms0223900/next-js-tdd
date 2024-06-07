@@ -1,9 +1,10 @@
 'use client'
 import React, { useRef, useState } from "react";
-import { Todo, TodoApp } from "./TodoApp";
+import { IdGeneratorImpl, Todo, TodoApp } from "./TodoApp";
+import { TodoRepoImpl } from "./TodoList.test";
 
 export function TodoListApp() {
-    const todoAppRef = useRef<TodoApp>(new TodoApp([]));
+    const todoAppRef = useRef<TodoApp>(new TodoApp([], new IdGeneratorImpl(), new TodoRepoImpl()));
     const [content, setContent] = useState("");
     const [editingContent, setEditingContent] = useState("");
     const [todoList, setTodoList] = useState<Todo[]>([]);
