@@ -84,7 +84,7 @@ export class TodoApp {
         ]
     }
 
-    async syncData() {
+    async asyncSyncTodos() {
         const todos = await this.todoRepo.getTodos();
         this.todoList = [...todos]
     }

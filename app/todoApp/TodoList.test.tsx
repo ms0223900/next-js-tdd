@@ -71,7 +71,7 @@ describe('Todo List test', () => {
         expect(todoApp.getTodoById(2)?.content).toEqual('bar')
     });
 
-    it('should sync todo data from resources.', async () => {
+    it('should get todo data from repo.', async () => {
         jest.spyOn(TodoRepoImpl.prototype, 'getTodos').mockResolvedValueOnce([
             new Todo({
                 id: 0,
@@ -82,7 +82,7 @@ describe('Todo List test', () => {
         todoApp = new TodoApp([], new IdGeneratorImpl(), new TodoRepoImpl());
         expect(todoApp.getTodos()).toHaveLength(0)
 
-        await todoApp.syncData()
+        await todoApp.asyncSyncTodos()
 
         expect(todoApp.getTodos()).toEqual([
             new Todo({
@@ -91,6 +91,6 @@ describe('Todo List test', () => {
                 content: 'hi'
             }),
         ])
-
     });
+
 })
