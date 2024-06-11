@@ -37,9 +37,25 @@ export class TodoRepoImpl implements TodoRepo {
     }
 }
 
+type TodoAction = AddTodoAction
+
+class AddTodoAction {
+    type: string;
+    payload: { checked: boolean; id: any; content: string };
+
+    constructor(id: number, input: string) {
+        this.type = 'ADD_TODO'
+        this.payload = {
+            id: id,
+            checked: false,
+            content: input,
+        }
+    }
+
+}
+
 export class TodoApp {
     todoList: Todo[]
-    private latestId: number = 0;
     private idGenerator: IdGenerator;
     private todoRepo: TodoRepo;
 
@@ -54,11 +70,7 @@ export class TodoApp {
     }
 
     addTodo(input: string) {
-        this.todoList.push(new Todo({
-            id: this.idGenerator.getId(),
-            checked: false,
-            content: input
-        }))
+        this.dispatch(new AddTodoAction(this.idGenerator.getId(), input))
     }
 
     checkTodo(id: number) {
@@ -88,6 +100,13 @@ export class TodoApp {
         const todos = await this.todoRepo.getTodos();
         this.todoList = [...todos]
     }
+
+    private dispatch(action: TodoAction) {
+        if (action.type === 'ADD_TODO') {
+            this.todoList.push(new Todo(action.payload))
+        }
+
+    }
 }
 
 export class Todo {
@@ -111,10 +130,6 @@ export class Todo {
 
     get content(): string {
         return this._content;
-    }
-
-    set checked(value: boolean) {
-        this._checked = value;
     }
 
     set id(value: number) {
