@@ -23,4 +23,9 @@ export class TodoAppSample {
     getTodo(id: number) {
         return this.todoList.getTodoById(id);
     }
+
+    toggleTodo(id: number) {
+        const todoById = this.todoList.getTodoById(id);
+        todoById?.toggleChecked()
+    }
 }

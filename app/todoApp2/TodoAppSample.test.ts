@@ -35,6 +35,8 @@ describe('Todo App TDD Sample', function () {
     it('Should toggle todo', () => {
         todoAppSample.addTodo('hi')
         expect(todoAppSample.getTodo(0)?.checked).toBeFalsy()
+        todoAppSample.toggleTodo(0)
+        expect(todoAppSample.getTodo(0)?.checked).toBeTruthy()
     });
 
 

@@ -33,4 +33,7 @@ export class Todo {
         this.content = content
     }
 
+    toggleChecked() {
+        this.checked = !this.checked
+    }
 }
