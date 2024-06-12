@@ -19,4 +19,8 @@ export class TodoAppSample {
     removeTodo(id: number) {
         this.todoList.remove(id)
     }
+
+    getTodo(id: number) {
+        return this.todoList.getTodoById(id);
+    }
 }

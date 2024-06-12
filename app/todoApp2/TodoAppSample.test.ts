@@ -32,6 +32,12 @@ describe('Todo App TDD Sample', function () {
         expect(todoAppSample.getTodoList()).toHaveLength(0)
     });
 
+    it('Should toggle todo', () => {
+        todoAppSample.addTodo('hi')
+        expect(todoAppSample.getTodo(0)?.checked).toBeFalsy()
+    });
+
+
 
 
 });
