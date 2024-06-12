@@ -8,11 +8,15 @@ export class TodoAppSample {
     private todoList: TodoList;
 
     addTodo(content: string) {
-        this.todoList.addTodo(new Todo(content))
+        this.todoList.addTodo(content)
 
     }
 
     getTodoList() {
         return this.todoList.get();
+    }
+
+    removeTodo(id: number) {
+        this.todoList.remove(id)
     }
 }

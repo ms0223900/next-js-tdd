@@ -10,7 +10,7 @@ describe('Todo App TDD Sample', function () {
     it('Should add todo', () => {
         todoAppSample.addTodo('hi')
         expect(todoAppSample.getTodoList()).toEqual([
-            new Todo('hi')
+            new Todo(0,'hi')
         ])
     });
 
@@ -18,10 +18,19 @@ describe('Todo App TDD Sample', function () {
         todoAppSample.addTodo('hi')
         todoAppSample.addTodo('hoooo')
         expect(todoAppSample.getTodoList()).toEqual([
-            new Todo('hi'),
-            new Todo('hoooo'),
+            new Todo(0,'hi'),
+            new Todo(1,'hoooo'),
         ])
     });
+
+    it('Should delete todo', () => {
+        todoAppSample.addTodo('hi')
+        expect(todoAppSample.getTodoList()).toEqual([
+            new Todo(0,'hi'),
+        ])
+        todoAppSample.removeTodo(1)
+    });
+
 
 
 });

@@ -9,16 +9,22 @@ export class TodoList {
         return this.todos;
     }
 
-    addTodo(todo: Todo) {
-        this.todos.push(todo)
+    addTodo(content:string) {
+        this.todos.push(new Todo(this.todos.length,content))
+    }
+
+    remove(id: number) {
+        return this.todos.filter(todo => todo.id !== id);
     }
 }
 
 export class Todo {
     content: string
     checked: boolean;
+    id: number;
 
-    constructor(content: string) {
+    constructor(id: number, content: string) {
+        this.id = id
         this.checked = false
         this.content = content
     }
