@@ -43,8 +43,12 @@ class Todo {
 }
 
 describe('Todo App TDD Sample', function () {
+    let todoAppSample = new TodoAppSampleTest();
+    beforeEach(() => {
+        todoAppSample = new TodoAppSampleTest()
+    });
+
     it('Should add todo', () => {
-        let todoAppSample = new TodoAppSampleTest();
         todoAppSample.addTodo('hi')
         expect(todoAppSample.getTodoList()).toEqual([
             new Todo('hi')
@@ -52,7 +56,6 @@ describe('Todo App TDD Sample', function () {
     });
 
     it('Should add two todos', () => {
-        let todoAppSample = new TodoAppSampleTest();
         todoAppSample.addTodo('hi')
         todoAppSample.addTodo('hoooo')
         expect(todoAppSample.getTodoList()).toEqual([
