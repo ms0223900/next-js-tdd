@@ -9,12 +9,12 @@ export class TodoList {
         return this.todos;
     }
 
-    addTodo(content:string) {
-        this.todos.push(new Todo(this.todos.length,content))
+    addTodo(content: string) {
+        this.todos.push(new Todo(this.todos.length, content))
     }
 
     remove(id: number) {
-        return this.todos.filter(todo => todo.id !== id);
+        this.todos = this.todos.filter(todo => todo.id !== id);
     }
 }
 

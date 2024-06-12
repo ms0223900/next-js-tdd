@@ -28,7 +28,8 @@ describe('Todo App TDD Sample', function () {
         expect(todoAppSample.getTodoList()).toEqual([
             new Todo(0,'hi'),
         ])
-        todoAppSample.removeTodo(1)
+        todoAppSample.removeTodo(0)
+        expect(todoAppSample.getTodoList()).toHaveLength(0)
     });
 
 
