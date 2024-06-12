@@ -1,4 +1,5 @@
-import { IdGeneratorImpl, Todo, TodoApp, TodoDto, TodoRepoImpl } from "./TodoApp";
+import { IdGeneratorImpl, TodoApp, TodoDto, TodoRepoImpl } from "./TodoApp";
+import { Todo } from "app/todoApp/Todo";
 
 
 describe('Todo List test', () => {

@@ -1,3 +1,6 @@
+import { Todo } from "app/todoApp/Todo";
+import { AddTodoAction, TodoList } from "app/todoApp/TodoList";
+
 interface IdGenerator {
     getId: () => number
 }
@@ -37,71 +40,6 @@ export class TodoRepoImpl implements TodoRepo {
     }
 }
 
-type TodoAction = AddTodoAction
-
-class AddTodoAction {
-    type: string;
-    payload: { checked: boolean; id: any; content: string };
-
-    constructor(id: number, input: string) {
-        this.type = 'ADD_TODO'
-        this.payload = {
-            id: id,
-            checked: false,
-            content: input,
-        }
-    }
-
-}
-
-class TodoList {
-    todoList: Todo[]
-
-    constructor(todoList: Todo[]) {
-        this.todoList = todoList;
-    }
-
-    getTodoById(id: number) {
-        const foundTodo = this.todoList.find(todo => todo.id === id);
-        return foundTodo;
-    }
-
-    getTodos() {
-        return [...this.todoList];
-    }
-
-    checkTodo(id: number) {
-        const foundTodo = this.getTodoById(id);
-        foundTodo?.toggleChecked()
-
-    }
-
-    editTodo(id: number, content: string) {
-        const todoById = this.getTodoById(id);
-        todoById?.updateContent(content)
-    }
-
-    removeTodo(id: number) {
-        const foundIdx = this.todoList.findIndex(todo => todo.id === id);
-        this.todoList = [
-            ...this.todoList.slice(0, foundIdx),
-            ...this.todoList.slice(foundIdx + 1),
-        ]
-    }
-
-    setTodos(_todos: Todo[]) {
-        this.todoList = [..._todos]
-    }
-
-    dispatch(action: TodoAction) {
-        if (action.type === 'ADD_TODO') {
-            this.todoList.push(new Todo(action.payload))
-            return
-        }
-
-    }
-}
-
 export class TodoApp {
     todoList: TodoList
     private idGenerator: IdGenerator;
@@ -136,45 +74,5 @@ export class TodoApp {
     async asyncSyncTodos() {
         const todos = await this.todoRepo.getTodos();
         this.todoList.setTodos([...todos])
-    }
-}
-
-export class Todo {
-    private _checked: boolean;
-    private _id: number;
-    private _content: string;
-
-    constructor({ checked, id, content }: { checked: boolean; id: number; content: string }) {
-        this._checked = checked
-        this._id = id
-        this._content = content
-    }
-
-    get checked(): boolean {
-        return this._checked;
-    }
-
-    get id(): number {
-        return this._id;
-    }
-
-    get content(): string {
-        return this._content;
-    }
-
-    set id(value: number) {
-        this._id = value;
-    }
-
-    set content(value: string) {
-        this._content = value;
-    }
-
-    toggleChecked() {
-        this._checked = !this._checked
-    }
-
-    updateContent(content: string) {
-        this._content = content
     }
 }
