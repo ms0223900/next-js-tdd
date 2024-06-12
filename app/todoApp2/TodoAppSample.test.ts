@@ -50,4 +50,16 @@ describe('Todo App TDD Sample', function () {
             new Todo('hi')
         ])
     });
+
+    it('Should add two todos', () => {
+        let todoAppSample = new TodoAppSampleTest();
+        todoAppSample.addTodo('hi')
+        todoAppSample.addTodo('hoooo')
+        expect(todoAppSample.getTodoList()).toEqual([
+            new Todo('hi'),
+            new Todo('hoooo'),
+        ])
+    });
+
+
 });
