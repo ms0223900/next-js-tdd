@@ -54,33 +54,26 @@ class AddTodoAction {
 
 }
 
-export class TodoApp {
+class TodoList {
     todoList: Todo[]
-    private idGenerator: IdGenerator;
-    private todoRepo: TodoRepo;
 
-    constructor(todoList: Todo[], idGenerator: IdGenerator = new IdGeneratorImpl(), todoRepo = new TodoRepoImpl()) {
+    constructor(todoList: Todo[]) {
         this.todoList = todoList;
-        this.idGenerator = idGenerator
-        this.todoRepo = todoRepo
+    }
+
+    getTodoById(id: number) {
+        const foundTodo = this.todoList.find(todo => todo.id === id);
+        return foundTodo;
     }
 
     getTodos() {
         return [...this.todoList];
     }
 
-    addTodo(input: string) {
-        this.dispatch(new AddTodoAction(this.idGenerator.getId(), input))
-    }
-
     checkTodo(id: number) {
         const foundTodo = this.getTodoById(id);
         foundTodo?.toggleChecked()
-    }
 
-    getTodoById(id: number) {
-        const foundTodo = this.todoList.find(todo => todo.id === id);
-        return foundTodo;
     }
 
     editTodo(id: number, content: string) {
@@ -96,16 +89,53 @@ export class TodoApp {
         ]
     }
 
-    async asyncSyncTodos() {
-        const todos = await this.todoRepo.getTodos();
-        this.todoList = [...todos]
+    setTodos(_todos: Todo[]) {
+        this.todoList = [..._todos]
     }
 
-    private dispatch(action: TodoAction) {
+    dispatch(action: TodoAction) {
         if (action.type === 'ADD_TODO') {
             this.todoList.push(new Todo(action.payload))
+            return
         }
 
+    }
+}
+
+export class TodoApp {
+    todoList: TodoList
+    private idGenerator: IdGenerator;
+    private todoRepo: TodoRepo;
+
+    constructor(todoList: Todo[], idGenerator: IdGenerator = new IdGeneratorImpl(), todoRepo = new TodoRepoImpl()) {
+        this.todoList = new TodoList([])
+        this.idGenerator = idGenerator
+        this.todoRepo = todoRepo
+    }
+
+    getTodos() {
+        return [...this.todoList.getTodos()];
+    }
+
+    addTodo(input: string) {
+        this.todoList.dispatch(new AddTodoAction(this.idGenerator.getId(), input))
+    }
+
+    checkTodo(id: number) {
+        this.todoList.checkTodo(id)
+    }
+
+    editTodo(id: number, content: string) {
+        this.todoList.editTodo(id, content)
+    }
+
+    removeTodo(id: number) {
+        this.todoList.removeTodo(id)
+    }
+
+    async asyncSyncTodos() {
+        const todos = await this.todoRepo.getTodos();
+        this.todoList.setTodos([...todos])
     }
 }
 

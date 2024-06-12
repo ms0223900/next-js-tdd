@@ -19,13 +19,13 @@ describe('Todo List test', () => {
     it('should check todo', () => {
         given_todo_list(['hi'])
 
-        expect(todoApp.getTodoById(0)?.checked).toBeFalsy()
+        expect(todoApp.todoList.getTodoById(0)?.checked).toBeFalsy()
 
         todoApp.checkTodo(0)
-        expect(todoApp.getTodoById(0)?.checked).toBeTruthy()
+        expect(todoApp.todoList.getTodoById(0)?.checked).toBeTruthy()
 
         todoApp.checkTodo(0)
-        expect(todoApp.getTodoById(0)?.checked).toBeFalsy()
+        expect(todoApp.todoList.getTodoById(0)?.checked).toBeFalsy()
     });
 
     it('should edit todo', () => {
@@ -33,7 +33,7 @@ describe('Todo List test', () => {
         given_todo_list(['hi'])
 
         todoApp.editTodo(0, NEW_TODO_CONTENT)
-        expect(todoApp.getTodoById(0)?.content).toEqual(NEW_TODO_CONTENT)
+        expect(todoApp.todoList.getTodoById(0)?.content).toEqual(NEW_TODO_CONTENT)
     });
 
     function given_todo_list(todoInputs: string[]) {
@@ -68,7 +68,7 @@ describe('Todo List test', () => {
 
         todoApp.addTodo('fooo')
         todoApp.editTodo(2, 'bar')
-        expect(todoApp.getTodoById(2)?.content).toEqual('bar')
+        expect(todoApp.todoList.getTodoById(2)?.content).toEqual('bar')
     });
 
     it('should get todo data from repo.', async () => {
