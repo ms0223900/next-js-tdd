@@ -7,12 +7,6 @@ export class TodoList {
     }
 
     private todos: TodoItem[];
-
-    push(todoItem: TodoItem) {
-        this.todos.push(todoItem)
-
-    }
-
     removeTodo(id: number) {
         this.todos = this.todos.filter(todo => todo.id !== id);
     }
