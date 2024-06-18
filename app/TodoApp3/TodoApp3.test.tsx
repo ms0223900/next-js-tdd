@@ -42,12 +42,12 @@ describe('Todo App Sample 3', function () {
 
 
     function todo(params?: Partial<TodoItem>) {
-        return {
+        return new TodoItem( {
             id: 0,
             checked: false,
             content: 'hi',
             ...params
-        };
+        } );
     }
 
     it('should remove two todos', () => {
@@ -122,6 +122,15 @@ describe('Todo App Sample 3', function () {
             }),
         ])
     });
+
+    it('should toggle todo checked', () => {
+        todoApp3.addTodo('hi')
+
+        todoApp3.toggleTodo(0)
+        const todo = todoApp3.getTodoList().find(todo=>todo.id===0);
+        expect(todo?.checked).toBeTruthy()
+    });
+
 
 
 });

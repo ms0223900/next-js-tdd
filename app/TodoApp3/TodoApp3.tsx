@@ -1,24 +1,5 @@
 import { TodoItem } from "app/TodoApp3/types";
-
-class TodoList {
-    constructor(todos: TodoItem[]) {
-        this.todos = todos;
-    }
-    private todos: TodoItem[];
-
-    push(todoItem: TodoItem) {
-        this.todos.push(todoItem)
-
-    }
-
-    removeTodo(id: number) {
-        this.todos = this.todos.filter(todo => todo.id !== id);
-    }
-
-    getTodos() {
-        return this.todos;
-    }
-}
+import { TodoList } from "app/TodoApp3/TodoList";
 
 export class TodoApp3 {
     private latestId = 0;
@@ -30,11 +11,11 @@ export class TodoApp3 {
 
     addTodo(content: string) {
         let id = this.latestId;
-        this.todoList.push({
+        this.todoList.push(new TodoItem({
             id: id,
             checked: false,
             content,
-        })
+        }))
         this.latestId++
     }
 
@@ -44,5 +25,10 @@ export class TodoApp3 {
 
     removeTodo(todoId: number) {
         this.todoList.removeTodo(todoId)
+    }
+
+    toggleTodo(id: number) {
+        const todoById = this.todoList.findById(id);
+        todoById?.toggleTodo()
     }
 }
