@@ -127,7 +127,7 @@ describe('Todo App Sample 3', function () {
         todoApp3.addTodo('hi')
 
         todoApp3.toggleTodo(0)
-        const todo = todoApp3.getTodoList().find(todo=>todo.id===0);
+        const todo = todoApp3.findTodoById(0)
         expect(todo?.checked).toBeTruthy()
     });
 

@@ -31,4 +31,8 @@ export class TodoApp3 {
         const todoById = this.todoList.findById(id);
         todoById?.toggleTodo()
     }
+
+    findTodoById(id: number) {
+        return this.todoList.findById(id);
+    }
 }
