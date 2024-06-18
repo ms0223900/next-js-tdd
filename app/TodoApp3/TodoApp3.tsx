@@ -2,7 +2,6 @@ import { TodoItem } from "app/TodoApp3/types";
 import { TodoList } from "app/TodoApp3/TodoList";
 
 export class TodoApp3 {
-    private latestId = 0;
     constructor() {
         this.todoList = new TodoList([])
     }
@@ -10,13 +9,7 @@ export class TodoApp3 {
     private todoList: TodoList
 
     addTodo(content: string) {
-        let id = this.latestId;
-        this.todoList.push(new TodoItem({
-            id: id,
-            checked: false,
-            content,
-        }))
-        this.latestId++
+        this.todoList.addTodo(content)
     }
 
     getTodoList(): TodoItem[] {
