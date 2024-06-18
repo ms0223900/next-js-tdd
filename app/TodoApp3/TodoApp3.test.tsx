@@ -44,6 +44,19 @@ describe('Todo App Sample 3', function () {
         }])
     });
 
+    it('should add two todos', () => {
+        todoApp3.addTodo('hi')
+        todoApp3.addTodo('hooo')
+        expect(todoApp3.getTodoList()).toEqual([
+            todo(),
+            todo({
+                id:1,
+                content: 'hooo'
+            }),
+        ])
+    });
+
+
     it('should remove todo', () => {
         todoApp3.addTodo('hi')
         expect(todoApp3.getTodoList()).toEqual([{
