@@ -13,7 +13,7 @@ class TodoApp3 {
 
     addTodo(content: string) {
         this.todoList.push({
-            id:0,
+            id: this.todoList.length,
             checked: false,
             content,
         })
@@ -24,15 +24,15 @@ class TodoApp3 {
     }
 
     removeTodo(todoId: number) {
-        const newTodoList = this.todoList.filter(todo => todo.id!==todoId);
-        this.todoList=newTodoList
+        const newTodoList = this.todoList.filter(todo => todo.id !== todoId);
+        this.todoList = newTodoList
     }
 }
 
 describe('Todo App Sample 3', function () {
     let todoApp3 = new TodoApp3();
     beforeEach(() => {
-         todoApp3 = new TodoApp3();
+        todoApp3 = new TodoApp3();
     });
 
     it('should add todo', () => {
@@ -52,6 +52,31 @@ describe('Todo App Sample 3', function () {
             content: 'hi'
         }])
         todoApp3.removeTodo(0)
+        expect(todoApp3.getTodoList()).toHaveLength(0)
+    });
+
+
+    function todo(params?: Partial<TodoItem>) {
+        return {
+            id: 0,
+            checked: false,
+            content: 'hi',
+            ...params
+        };
+    }
+
+    it('should remove two todos', () => {
+        todoApp3.addTodo('hi')
+        todoApp3.addTodo('hooo')
+        expect(todoApp3.getTodoList()).toEqual([
+            todo(),
+            todo({
+                id:1,
+                content: 'hooo'
+            }),
+        ])
+        todoApp3.removeTodo(0)
+        todoApp3.removeTodo(1)
         expect(todoApp3.getTodoList()).toHaveLength(0)
     });
 

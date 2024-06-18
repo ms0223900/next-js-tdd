@@ -42,7 +42,14 @@ describe('Todo App TDD Sample', function () {
             new Todo(1,'hey'),
             new Todo(2,'hi'),
         ])
+
         todoAppSample.addTodo('hoyye')
+        expect(todoAppSample.getTodoList()).toEqual([
+            new Todo(1,'hey'),
+            new Todo(2,'hi'),
+            new Todo(3,'hoyye'),
+        ])
+
         todoAppSample.removeTodo(1)
         expect(todoAppSample.getTodoList()).toEqual([
             new Todo(2,'hi'),
