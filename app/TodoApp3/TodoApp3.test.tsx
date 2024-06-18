@@ -1,33 +1,5 @@
-interface TodoItem {
-    id: number;
-    checked: boolean
-    content: string
-}
-
-class TodoApp3 {
-    constructor() {
-        this.todoList = [];
-    }
-
-    private todoList: TodoItem[];
-
-    addTodo(content: string) {
-        this.todoList.push({
-            id: this.todoList.length,
-            checked: false,
-            content,
-        })
-    }
-
-    getTodoList() {
-        return this.todoList;
-    }
-
-    removeTodo(todoId: number) {
-        const newTodoList = this.todoList.filter(todo => todo.id !== todoId);
-        this.todoList = newTodoList
-    }
-}
+import { TodoApp3 } from "app/TodoApp3/TodoApp3";
+import { TodoItem } from "app/TodoApp3/types";
 
 describe('Todo App Sample 3', function () {
     let todoApp3 = new TodoApp3();
@@ -50,7 +22,7 @@ describe('Todo App Sample 3', function () {
         expect(todoApp3.getTodoList()).toEqual([
             todo(),
             todo({
-                id:1,
+                id: 1,
                 content: 'hooo'
             }),
         ])
@@ -84,13 +56,71 @@ describe('Todo App Sample 3', function () {
         expect(todoApp3.getTodoList()).toEqual([
             todo(),
             todo({
-                id:1,
+                id: 1,
                 content: 'hooo'
             }),
         ])
         todoApp3.removeTodo(0)
         todoApp3.removeTodo(1)
         expect(todoApp3.getTodoList()).toHaveLength(0)
+    });
+
+    it('should remove two todos', () => {
+        todoApp3.addTodo('hi')
+        todoApp3.addTodo('hooo')
+        expect(todoApp3.getTodoList()).toEqual([
+            todo(),
+            todo({
+                id: 1,
+                content: 'hooo'
+            }),
+        ])
+        todoApp3.removeTodo(0)
+        todoApp3.removeTodo(1)
+        expect(todoApp3.getTodoList()).toHaveLength(0)
+    });
+
+    it('should add todos and remove two todos', () => {
+        todoApp3.addTodo('hi')
+        todoApp3.addTodo('hooo')
+
+        todoApp3.removeTodo(0)
+        expect(todoApp3.getTodoList()).toEqual([
+            todo({
+                id: 1,
+                content: 'hooo'
+            }),
+        ])
+
+        todoApp3.addTodo('heyyyy')
+        expect(todoApp3.getTodoList()).toEqual([
+            todo({
+                id: 1,
+                content: 'hooo'
+            }),
+            todo({
+                id: 2,
+                content: 'heyyyy'
+            }),
+        ])
+        todoApp3.removeTodo(1)
+        expect(todoApp3.getTodoList()).toEqual([
+            todo({
+                id: 2,
+                content: 'heyyyy'
+            }),
+        ])
+        todoApp3.addTodo('hoho')
+        expect(todoApp3.getTodoList()).toEqual([
+            todo({
+                id: 2,
+                content: 'heyyyy'
+            }),
+            todo({
+                id: 3,
+                content: 'hoho'
+            }),
+        ])
     });
 
 
