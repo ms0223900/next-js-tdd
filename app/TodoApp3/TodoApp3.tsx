@@ -1,12 +1,32 @@
 import { TodoItem } from "app/TodoApp3/types";
 
+class TodoList {
+    constructor(todos: TodoItem[]) {
+        this.todos = todos;
+    }
+    private todos: TodoItem[];
+
+    push(todoItem: TodoItem) {
+        this.todos.push(todoItem)
+
+    }
+
+    removeTodo(id: number) {
+        this.todos = this.todos.filter(todo => todo.id !== id);
+    }
+
+    getTodos() {
+        return this.todos;
+    }
+}
+
 export class TodoApp3 {
     private latestId = 0;
     constructor() {
-        this.todoList = [];
+        this.todoList = new TodoList([])
     }
 
-    private todoList: TodoItem[];
+    private todoList: TodoList
 
     addTodo(content: string) {
         let id = this.latestId;
@@ -18,12 +38,11 @@ export class TodoApp3 {
         this.latestId++
     }
 
-    getTodoList() {
-        return this.todoList;
+    getTodoList(): TodoItem[] {
+        return this.todoList.getTodos();
     }
 
     removeTodo(todoId: number) {
-        const newTodoList = this.todoList.filter(todo => todo.id !== todoId);
-        this.todoList = newTodoList
+        this.todoList.removeTodo(todoId)
     }
 }
