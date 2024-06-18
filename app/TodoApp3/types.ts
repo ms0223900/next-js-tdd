@@ -11,4 +11,7 @@ export class TodoItem {
     toggleTodo() {
         this.checked=!this.checked
     }
+    setContent(content: string) {
+        this.content=content
+    }
 }

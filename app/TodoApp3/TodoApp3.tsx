@@ -35,4 +35,9 @@ export class TodoApp3 {
     findTodoById(id: number) {
         return this.todoList.findById(id);
     }
+
+    editTodo(id: number, content: string) {
+        const findById = this.todoList.findById(id);
+        findById?.setContent(content)
+    }
 }

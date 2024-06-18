@@ -131,6 +131,15 @@ describe('Todo App Sample 3', function () {
         expect(todo?.checked).toBeTruthy()
     });
 
+    it('should edit todo content', () => {
+        todoApp3.addTodo('hi')
+
+        todoApp3.editTodo(0, 'hoooo')
+        const todo = todoApp3.findTodoById(0)
+        expect(todo?.content).toEqual('hoooo')
+    });
+
+
 
 
 });
