@@ -1,4 +1,5 @@
 import { TodoAppSampleTest } from "app/TodoAppSample/TodoAppSampleTest";
+import { TodoItem } from "app/TodoAppSample/TodoItem";
 
 // 先以 TDD 方式做出核心 Todo App 邏輯，不包含前端介面
 describe('Todo App Sample', function () {
@@ -6,40 +7,29 @@ describe('Todo App Sample', function () {
     beforeEach(() => {
         todoAppSample = new TodoAppSampleTest();
     });
+
+    function todo(id: number, content: string) {
+        return new TodoItem(id, content, false);
+    }
+
     it('Should add one todo, and get one todo.', () => {
         todoAppSample.addTodo('hi')
-        expect(todoAppSample.getTodos()).toEqual([{
-            id: 0,
-            content: 'hi',
-            checked: false,
-        }])
+        expect(todoAppSample.getTodos()).toEqual([todo(0,'hi')])
     });
 
     it('Should add two todos, and get two todos.', () => {
         todoAppSample.addTodo('hi')
         todoAppSample.addTodo('hooo')
         expect(todoAppSample.getTodos()).toEqual([
-            {
-                id: 0,
-                content: 'hi',
-                checked: false,
-            },
-            {
-                id: 1,
-                content: 'hooo',
-                checked: false,
-            },
+            todo(0,'hi'),
+            todo(1,'hooo'),
         ])
     });
 
     it('Should remove one todo.', () => {
         todoAppSample.addTodo('hi')
         expect(todoAppSample.getTodos()).toEqual([
-            {
-                id: 0,
-                content: 'hi',
-                checked: false,
-            },
+            todo(0,'hi'),
         ])
         todoAppSample.removeTodo(0) // id
         expect(todoAppSample.getTodos()).toHaveLength(0)
@@ -49,21 +39,13 @@ describe('Todo App Sample', function () {
         todoAppSample.addTodo('hi')
         todoAppSample.addTodo('heyyy')
         expect(todoAppSample.getTodos()).toEqual([
-            {
-                id: 0,
-                content: 'hi',
-                checked: false,
-            },{
-                id: 1,
-                content: 'heyyy',
-                checked: false,
-            },
+            todo(0,'hi'),
+            todo(1,'heyyy'),
         ])
         todoAppSample.removeTodo(0) // id
         todoAppSample.removeTodo(1) // id
         expect(todoAppSample.getTodos()).toHaveLength(0)
     });
-
 
 
 });
