@@ -1,13 +1,23 @@
-class TodoAppSampleTest {
-    addTodo(todoContent: string) {
+class TodoItem {
+    constructor(content: string, checked: boolean) {
+        this.content = content;
+        this.checked = checked;
+    }
+    content:string
+    checked:boolean
+}
 
+class TodoAppSampleTest {
+    constructor() {
+        this.todos = [];
+    }
+    private todos: TodoItem[];
+    addTodo(todoContent: string) {
+        this.todos.push(new TodoItem(todoContent,false))
     }
 
     getTodos() {
-        return [{
-            content: 'hi',
-            checked: false
-        }];
+        return this.todos;
     }
 }
 
@@ -21,4 +31,22 @@ describe('Todo App Sample', function () {
             checked: false,
         }])
     });
+
+    it('Should add two todos, and get two todos.', () => {
+        const todoAppSample = new TodoAppSampleTest();
+        todoAppSample.addTodo('hi')
+        todoAppSample.addTodo('hooo')
+        expect(todoAppSample.getTodos()).toEqual([
+            {
+                content: 'hi',
+                checked: false,
+            },
+            {
+                content: 'hooo',
+                checked: false,
+            },
+        ])
+    });
+
+
 });
