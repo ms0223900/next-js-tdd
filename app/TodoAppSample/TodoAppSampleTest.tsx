@@ -30,4 +30,9 @@ export class TodoAppSampleTest {
         const todoById = this.todos.find(todo => todo.id === id);
         return todoById;
     }
+
+    editContent(id: number, content: string) {
+        const todoById = this.getTodoById(id);
+        todoById?.setContent(content)
+    }
 }

@@ -54,6 +54,14 @@ describe('Todo App Sample', function () {
         expect(todoAppSample.getTodoById(0)?.checked).toBeTruthy()
     });
 
+    it('Should edit todo content.', () => {
+        todoAppSample.addTodo('hi')
+        expect(todoAppSample.getTodoById(0)?.content).toEqual('hi')
+        todoAppSample.editContent(0, 'hoooo')
+        expect(todoAppSample.getTodoById(0)?.content).toEqual('hoooo')
+    });
+
+
 
 
 });
