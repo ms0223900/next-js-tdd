@@ -45,5 +45,25 @@ describe('Todo App Sample', function () {
         expect(todoAppSample.getTodos()).toHaveLength(0)
     });
 
+    it('Should remove two todos.', () => {
+        todoAppSample.addTodo('hi')
+        todoAppSample.addTodo('heyyy')
+        expect(todoAppSample.getTodos()).toEqual([
+            {
+                id: 0,
+                content: 'hi',
+                checked: false,
+            },{
+                id: 1,
+                content: 'heyyy',
+                checked: false,
+            },
+        ])
+        todoAppSample.removeTodo(0) // id
+        todoAppSample.removeTodo(1) // id
+        expect(todoAppSample.getTodos()).toHaveLength(0)
+    });
+
+
 
 });
