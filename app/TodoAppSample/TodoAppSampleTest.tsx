@@ -20,4 +20,14 @@ export class TodoAppSampleTest {
     removeTodo(todoId: number) {
         this.todos=this.todos.filter(todo=>todo.id!==todoId)
     }
+
+    toggleTodo(id: number) {
+        const todoById = this.getTodoById(id);
+        todoById?.toggle()
+    }
+
+     getTodoById(id: number) {
+        const todoById = this.todos.find(todo => todo.id === id);
+        return todoById;
+    }
 }

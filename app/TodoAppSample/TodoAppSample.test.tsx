@@ -47,5 +47,13 @@ describe('Todo App Sample', function () {
         expect(todoAppSample.getTodos()).toHaveLength(0)
     });
 
+    it('Should toggle check todo.', () => {
+        todoAppSample.addTodo('hi')
+        expect(todoAppSample.getTodoById(0)?.checked).toBeFalsy()
+        todoAppSample.toggleTodo(0)
+        expect(todoAppSample.getTodoById(0)?.checked).toBeTruthy()
+    });
+
+
 
 });

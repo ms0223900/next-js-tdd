@@ -9,4 +9,7 @@ export class TodoItem {
 
     content: string
     checked: boolean
+    toggle() {
+        this.checked=!this.checked
+    }
 }
