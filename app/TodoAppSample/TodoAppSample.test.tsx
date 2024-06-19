@@ -61,6 +61,34 @@ describe('Todo App Sample', function () {
         expect(todoAppSample.getTodoById(0)?.content).toEqual('hoooo')
     });
 
+    it('Should add, remove and edit todos.', () => {
+        todoAppSample.addTodo('hi')
+        expect(todoAppSample.getTodoById(0)?.content).toEqual('hi')
+        todoAppSample.editContent(0, 'hoooo')
+        expect(todoAppSample.getTodoById(0)?.content).toEqual('hoooo')
+
+        todoAppSample.addTodo('hoho')
+        expect(todoAppSample.getTodos()).toEqual([
+            todo(0,'hoooo'),
+            todo(1,'hoho'),
+        ])
+
+        todoAppSample.removeTodo(1)
+        expect(todoAppSample.getTodos()).toEqual([
+            todo(0, 'hoooo')
+        ])
+
+        todoAppSample.addTodo('hello')
+        expect(todoAppSample.getTodos()).toEqual([
+            todo(0, 'hoooo'),
+            todo(2, 'hello')
+        ])
+
+        todoAppSample.editContent(2, 'hello world')
+        expect(todoAppSample.getTodoById(2)?.content).toEqual('hello world')
+    });
+
+
 
 
 
