@@ -50,6 +50,7 @@ export function TodoListApp() {
     return (
         <div>
             <input data-testid={"todoInput"}
+                   placeholder={'Add a todo'}
                    value={content}
                    onChange={(e) => setContent(e.target.value)} />
             <ul>
@@ -58,7 +59,7 @@ export function TodoListApp() {
                         display: 'flex',
                         gap: '.5rem'
                     }}>
-                        <input type={"checkbox"} data-testid={"todoCheckbox"} checked={todo.checked}
+                        <input  type={"checkbox"} data-testid={"todoCheckbox"} checked={todo.checked}
                                onChange={(e) => handleToggleTodo(todo.id)} />
                         {editingTodo === todo.id ? (
                                 <div>
