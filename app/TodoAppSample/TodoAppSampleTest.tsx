@@ -1,38 +1,38 @@
 import { TodoItem } from "app/TodoAppSample/TodoItem";
+import { TodoList } from "app/TodoAppSample/TodoList";
 
 export class TodoAppSampleTest {
     private todoLatestId = 0; // 應該要隨 add 變多！
     constructor() {
-        this.todos = [];
+        this.todoList = new TodoList([])
     }
 
-    private todos: TodoItem[];
+    private todoList: TodoList;
 
     addTodo(todoContent: string) {
-        this.todos.push(new TodoItem(this.todoLatestId, todoContent, false))
+        this.todoList.push(new TodoItem(this.todoLatestId, todoContent, false))
         this.todoLatestId++
     }
 
     getTodos() {
-        return this.todos;
+        return this.todoList.todos;
     }
 
     removeTodo(todoId: number) {
-        this.todos=this.todos.filter(todo=>todo.id!==todoId)
+        this.todoList.removeTodo(todoId)
     }
 
     toggleTodo(id: number) {
-        const todoById = this.getTodoById(id);
+        const todoById = this.todoList.getById(id);
         todoById?.toggle()
     }
 
-     getTodoById(id: number) {
-        const todoById = this.todos.find(todo => todo.id === id);
-        return todoById;
+    editContent(id: number, content: string) {
+        const todoById = this.todoList.getById(id);
+        todoById?.setContent(content)
     }
 
-    editContent(id: number, content: string) {
-        const todoById = this.getTodoById(id);
-        todoById?.setContent(content)
+    getTodoById(id: number) {
+        return this.todoList.getById(id);
     }
 }
