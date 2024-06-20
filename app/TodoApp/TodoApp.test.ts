@@ -26,16 +26,8 @@ describe('Todo App', function () {
         todoApp.addTodo('- [ ] Add todo, and get todo')
         todoApp.addTodo('- [ ] Add two todos')
         expect(todoApp.getTodos()).toEqual([
-            {
-                id:0,
-                checked: false,
-                content: '- [ ] Add todo, and get todo'
-            },
-            {
-                id:1,
-                checked: false,
-                content: '- [ ] Add two todos'
-            }
+            todo({ id:0, checked:false, content: '- [ ] Add todo, and get todo' }),
+            todo({ id:1, checked:false, content: '- [ ] Add two todos' }),
         ])
     });
 
