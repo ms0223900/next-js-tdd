@@ -8,8 +8,6 @@ export interface TodoItem {
 
 export class TodoApp {
     private todoList: TodoList
-    private id = 0;
-
     constructor() {
         this.todoList = new TodoList([])
     }
