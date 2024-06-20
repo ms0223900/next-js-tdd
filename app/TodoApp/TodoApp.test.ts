@@ -1,4 +1,5 @@
-import { TodoApp, TodoItem } from "app/TodoApp/TodoApp";
+import { TodoApp } from "app/TodoApp/TodoApp";
+import { TodoItem } from "app/TodoApp/TodoItem";
 
 describe('Todo App', function () {
     let todoApp = new TodoApp();

@@ -1,15 +1,5 @@
 import { TodoList } from "app/TodoApp/TodoList";
 
-export interface TodoItem {
-    id: number;
-    checked: boolean
-    content: string
-
-    toggle(): void;
-}
-
-
-
 export class TodoApp {
     private todoList: TodoList
 
