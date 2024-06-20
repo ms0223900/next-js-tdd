@@ -26,6 +26,6 @@ export class TodoApp {
     }
 
     removeTodo(id: number) {
-        this.todos.filter(todo=>todo.id!==id)
+        this.todos = this.todos.filter(todo=>todo.id!==id)
     }
 }

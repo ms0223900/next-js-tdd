@@ -31,13 +31,27 @@ describe('Todo App', function () {
         ])
     });
 
+
     it('Should remove todo.', () => {
         todoApp.addTodo('- [ ] Add todo, and get todo')
         expect(todoApp.getTodos()).toEqual([
             todo({ id: 0, checked: false, content: '- [ ] Add todo, and get todo' }),
         ])
         todoApp.removeTodo(0)
+        expect(todoApp.getTodos()).toHaveLength(0)
     });
 
+
+    it('Should remove two todos, and get 0 todos.', () => {
+        todoApp.addTodo('- [ ] Add todo, and get todo')
+        todoApp.addTodo('- [ ] Add two todos')
+        expect(todoApp.getTodos()).toEqual([
+            todo({ id: 0, checked: false, content: '- [ ] Add todo, and get todo' }),
+            todo({ id: 1, checked: false, content: '- [ ] Add two todos' }),
+        ])
+        todoApp.removeTodo(0)
+        todoApp.removeTodo(1)
+        expect(todoApp.getTodos()).toHaveLength(0)
+    });
 
 });
