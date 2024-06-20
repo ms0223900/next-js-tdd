@@ -63,6 +63,9 @@ describe('Todo App', function () {
 
     it('Should edit todo content.', () => {
         todoApp.addTodo('hi')
+        expect(todoApp.getTodoById(0)?.content).toEqual('hi')
+        todoApp.editTodo(0, 'hey')
+        expect(todoApp.getTodoById(0)?.content).toEqual('hey')
     });
 
 

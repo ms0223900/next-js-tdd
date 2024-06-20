@@ -20,4 +20,8 @@ export class TodoItemImpl implements TodoItem {
     toggle(): void {
         this.checked = !this.checked
     }
+
+    editContent(content: string) {
+        this.content = content
+    }
 }
