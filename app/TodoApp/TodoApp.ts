@@ -27,22 +27,22 @@ class TodoList {
 }
 
 export class TodoApp {
-    private todos: TodoList
+    private todoList: TodoList
     private id = 0;
 
     constructor() {
-        this.todos = new TodoList([])
+        this.todoList = new TodoList([])
     }
 
     addTodo(content: string) {
-        this.todos.addTodo(content)
+        this.todoList.addTodo(content)
     }
 
     getTodos() {
-        return this.todos.todos;
+        return this.todoList.todos;
     }
 
     removeTodo(id: number) {
-        this.todos.remove(id)
+        this.todoList.remove(id)
     }
 }
