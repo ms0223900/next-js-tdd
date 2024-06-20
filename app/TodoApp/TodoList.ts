@@ -4,7 +4,7 @@ export class TodoList {
     private id = 0;
     todos: TodoItemImpl[]
 
-    constructor(todos: TodoItem[]) {
+    constructor(todos: TodoItemImpl[]) {
         this.todos = todos;
     }
 
