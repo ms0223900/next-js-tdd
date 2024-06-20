@@ -4,12 +4,12 @@ export interface TodoItem {
     content: string
 }
 
-export class TodoApp {
-    private todos: TodoItem[];
+class TodoList {
+    todos: TodoItem[]
     private id = 0;
 
-    constructor() {
-        this.todos = [];
+    constructor(todos: TodoItem[]) {
+        this.todos = todos;
     }
 
     addTodo(content: string) {
@@ -21,11 +21,28 @@ export class TodoApp {
         this.id++
     }
 
+    remove(id: number) {
+        this.todos = this.todos.filter(todo => todo.id !== id)
+    }
+}
+
+export class TodoApp {
+    private todos: TodoList
+    private id = 0;
+
+    constructor() {
+        this.todos = new TodoList([])
+    }
+
+    addTodo(content: string) {
+        this.todos.addTodo(content)
+    }
+
     getTodos() {
-        return this.todos;
+        return this.todos.todos;
     }
 
     removeTodo(id: number) {
-        this.todos = this.todos.filter(todo=>todo.id!==id)
+        this.todos.remove(id)
     }
 }

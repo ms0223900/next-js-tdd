@@ -41,7 +41,6 @@ describe('Todo App', function () {
         expect(todoApp.getTodos()).toHaveLength(0)
     });
 
-
     it('Should remove two todos, and get 0 todos.', () => {
         todoApp.addTodo('- [ ] Add todo, and get todo')
         todoApp.addTodo('- [ ] Add two todos')
