@@ -54,12 +54,18 @@ describe('Todo App', function () {
         expect(todoApp.getTodos()).toHaveLength(0)
     });
 
-    it('Should remove two todos, and get 0 todos.', () => {
+    it('Should toggle todo completed.', () => {
         todoApp.addTodo('- [ ] Add todo, and get todo')
-        expect(todoApp.getTodos()[0].checked).toBeFalsy()
+        expect(todoApp.getTodoById(0)?.checked).toBeFalsy()
         todoApp.toggleCompleted(0)
-        expect(todoApp.getTodos()[0].checked).toBeTruthy()
+        expect(todoApp.getTodoById(0)?.checked).toBeTruthy()
     });
+
+    it('Should edit todo content.', () => {
+        todoApp.addTodo('hi')
+    });
+
+
 
 
 });
