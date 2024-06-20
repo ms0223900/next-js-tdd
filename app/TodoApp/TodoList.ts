@@ -20,4 +20,8 @@ export class TodoList {
     remove(id: number) {
         this.todos = this.todos.filter(todo => todo.id !== id)
     }
+
+    findById(id: number) {
+        return this.todos.find(todo => todo.id === id);
+    }
 }

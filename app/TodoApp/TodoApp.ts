@@ -26,7 +26,7 @@ export class TodoApp {
     }
 
     toggleCompleted(id: number) {
-        const findById = this.todoList.todos.find(todo => todo.id === id);
+        const findById = this.todoList.findById(id);
         if (!findById) {
             return
         }
