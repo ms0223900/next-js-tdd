@@ -68,7 +68,25 @@ describe('Todo App', function () {
         expect(todoApp.getTodoById(0)?.content).toEqual('hey')
     });
 
+    it('Should add, remove and edit todos.', () => {
+        todoApp.addTodo('hi')
+        expect(todoApp.getTodoById(0)?.content).toEqual('hi')
+        todoApp.editTodo(0, 'hey')
+        expect(todoApp.getTodoById(0)?.content).toEqual('hey')
 
+        todoApp.removeTodo(0)
+        expect(todoApp.getTodos()).toHaveLength(0)
+
+        todoApp.addTodo('hooo')
+        expect(todoApp.getTodos()).toEqual([
+            todo({ id: 1, checked: false, content: 'hooo' })
+        ])
+        todoApp.toggleCompleted(1)
+        expect(todoApp.getTodoById(1)?.checked).toBeTruthy()
+
+        todoApp.removeTodo(1)
+        expect(todoApp.getTodos()).toHaveLength(0)
+    });
 
 
 });
