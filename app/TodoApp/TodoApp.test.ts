@@ -31,7 +31,7 @@ describe('Todo App', function () {
         ])
     });
 
-    it('Should add two todos, and get two todos.', () => {
+    it('Should remove todo.', () => {
         todoApp.addTodo('- [ ] Add todo, and get todo')
         expect(todoApp.getTodos()).toEqual([
             todo({ id: 0, checked: false, content: '- [ ] Add todo, and get todo' }),
