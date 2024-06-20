@@ -1,29 +1,4 @@
-interface TodoItem {
-    checked: boolean
-    content: string
-}
-
-class TodoApp {
-    private todos: TodoItem[];
-
-
-    constructor() {
-        this.todos = [];
-    }
-
-    addTodo(content: string) {
-        this.todos.push({
-            checked: false,
-            content,
-        })
-
-    }
-
-    getTodos() {
-        return this.todos;
-
-    }
-}
+import { TodoApp } from "app/TodoApp/TodoApp";
 
 describe('Todo App', function () {
     let todoApp = new TodoApp();
