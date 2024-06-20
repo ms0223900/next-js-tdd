@@ -1,29 +1,9 @@
+import { TodoList } from "app/TodoApp/TodoList";
+
 export interface TodoItem {
     id: number;
     checked: boolean
     content: string
-}
-
-class TodoList {
-    todos: TodoItem[]
-    private id = 0;
-
-    constructor(todos: TodoItem[]) {
-        this.todos = todos;
-    }
-
-    addTodo(content: string) {
-        this.todos.push({
-            id: this.id,
-            checked: false,
-            content,
-        })
-        this.id++
-    }
-
-    remove(id: number) {
-        this.todos = this.todos.filter(todo => todo.id !== id)
-    }
 }
 
 export class TodoApp {
