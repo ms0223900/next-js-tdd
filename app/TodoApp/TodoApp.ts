@@ -4,7 +4,11 @@ export interface TodoItem {
     id: number;
     checked: boolean
     content: string
+
+    toggle(): void;
 }
+
+
 
 export class TodoApp {
     private todoList: TodoList
@@ -27,9 +31,6 @@ export class TodoApp {
 
     toggleCompleted(id: number) {
         const findById = this.todoList.findById(id);
-        if (!findById) {
-            return
-        }
-        findById.checked = !findById.checked
+        findById?.toggle()
     }
 }
