@@ -8,6 +8,7 @@ export interface TodoItem {
 
 export class TodoApp {
     private todoList: TodoList
+
     constructor() {
         this.todoList = new TodoList([])
     }
@@ -22,5 +23,13 @@ export class TodoApp {
 
     removeTodo(id: number) {
         this.todoList.remove(id)
+    }
+
+    toggleCompleted(id: number) {
+        const findById = this.todoList.todos.find(todo => todo.id === id);
+        if (!findById) {
+            return
+        }
+        findById.checked = !findById.checked
     }
 }
