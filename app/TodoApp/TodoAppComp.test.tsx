@@ -46,34 +46,31 @@ describe('Todo App Component', function () {
     it('Should add one todo, and get one todo.', async () => {
         await givenRender()
 
-        fireEvent.change(
-            screen.getByTestId('todoInput'),
-            { target: { value: 'hi' } }
-        )
-        fireEvent.click(screen.getByTestId('addBtn'))
+        whenAddTodo('hi');
 
         expect(screen.queryByText('hi')).toBeInTheDocument()
     });
 
 
+    function whenAddTodo(todoContent: string) {
+        fireEvent.change(
+            screen.getByTestId('todoInput'),
+            { target: { value: todoContent } }
+        )
+        fireEvent.click(screen.getByTestId('addBtn'))
+    }
+
     it('Should add two todos, and get two todos.', async () => {
         await givenRender()
 
-        fireEvent.change(
-            screen.getByTestId('todoInput'),
-            { target: { value: 'hi' } }
-        )
-        fireEvent.click(screen.getByTestId('addBtn'))
+        whenAddTodo('hi');
 
-        fireEvent.change(
-            screen.getByTestId('todoInput'),
-            { target: { value: 'hooo' } }
-        )
-        fireEvent.click(screen.getByTestId('addBtn'))
+        whenAddTodo('hooo');
 
         expect(await screen.findByText('hi')).toBeInTheDocument()
         expect(await screen.findByText('hooo')).toBeInTheDocument()
     });
+
 
 
 });
