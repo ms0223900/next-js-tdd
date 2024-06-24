@@ -31,18 +31,20 @@ function TodoAppComp() {
 }
 
 describe('Todo App Component', function () {
-    it('Should have add button.', async () => {
+    async function givenRender() {
         await render(
             <TodoAppComp />
         )
+    }
+
+    it('Should have add button.', async () => {
+        await givenRender()
 
         expect(screen.getByTestId('addBtn')).toBeInTheDocument()
     });
 
     it('Should add one todo, and get one todo.', async () => {
-        await render(
-            <TodoAppComp />
-        )
+        await givenRender()
 
         fireEvent.change(
             screen.getByTestId('todoInput'),
