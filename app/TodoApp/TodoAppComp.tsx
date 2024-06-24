@@ -12,6 +12,11 @@ export function TodoAppComp() {
         setTodos([...todoAppRef.current.getTodos()])
     }
 
+    function handleDeleteTodo(id: number) {
+        todoAppRef.current.removeTodo(id)
+        setTodos([...todoAppRef.current.getTodos()])
+    }
+
     return <div>
         <input
             value={value}
@@ -22,7 +27,10 @@ export function TodoAppComp() {
         <button data-testid="addBtn" onClick={handleAddTodo}>Add</button>
         <div>
             {todos.map(todo => (
-                <div key={todo.id}>{todo.content}</div>
+                <div key={todo.id}>
+                    {todo.content}
+                    <button data-testid="deleteBtn" onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+                </div>
             ))}
         </div>
     </div>;

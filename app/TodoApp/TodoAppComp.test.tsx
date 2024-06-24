@@ -51,7 +51,6 @@ describe('Todo App Component', function () {
         expect(screen.queryByText('hi')).toBeInTheDocument()
     });
 
-
     function whenAddTodo(todoContent: string) {
         fireEvent.change(
             screen.getByTestId('todoInput'),
@@ -71,6 +70,17 @@ describe('Todo App Component', function () {
         expect(await screen.findByText('hooo')).toBeInTheDocument()
     });
 
+    it('Should remove one todo.', async () => {
+        await givenRender()
+
+        whenAddTodo('hi');
+
+        expect(await screen.findByText('hi')).toBeInTheDocument()
+
+        fireEvent.click(screen.getByTestId('deleteBtn'));
+
+        expect(screen.queryByText('hi')).not.toBeInTheDocument()
+    });
 
 
 });
