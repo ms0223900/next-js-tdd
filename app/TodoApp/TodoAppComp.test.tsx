@@ -56,4 +56,24 @@ describe('Todo App Component', function () {
     });
 
 
+    it('Should add two todos, and get two todos.', async () => {
+        await givenRender()
+
+        fireEvent.change(
+            screen.getByTestId('todoInput'),
+            { target: { value: 'hi' } }
+        )
+        fireEvent.click(screen.getByTestId('addBtn'))
+
+        fireEvent.change(
+            screen.getByTestId('todoInput'),
+            { target: { value: 'hooo' } }
+        )
+        fireEvent.click(screen.getByTestId('addBtn'))
+
+        expect(await screen.findByText('hi')).toBeInTheDocument()
+        expect(await screen.findByText('hooo')).toBeInTheDocument()
+    });
+
+
 });

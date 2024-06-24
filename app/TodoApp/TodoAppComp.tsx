@@ -9,7 +9,7 @@ export function TodoAppComp() {
 
     function handleAddTodo() {
         todoAppRef.current.addTodo(value)
-        setTodos(todoAppRef.current.getTodos())
+        setTodos([...todoAppRef.current.getTodos()])
     }
 
     return <div>
