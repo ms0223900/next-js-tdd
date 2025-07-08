@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/pages/index.module.css";
-import { TodoListApp } from "../../app/todoApp/TodoListApp";
+// import { TodoListApp } from "../../app/todoApp/TodoListApp";
 
 export default function Home() {
   return (
@@ -45,9 +45,16 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+
+          <a href="/emails-preview" className={styles.card}>
+            <h3>📧 Email Templates &rarr;</h3>
+            <p>
+              預覽所有可用的電子郵件模板 / Preview all available email templates.
+            </p>
+          </a>
         </div>
       </main>
-      <TodoListApp />
+      {/*<TodoListApp />*/}
 
       <footer className={styles.footer}>
         <a

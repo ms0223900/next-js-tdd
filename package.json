@@ -8,9 +8,11 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "@react-email/components": "^0.2.0",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-email": "^4.0.17",
     "server-only": "^0.0.1"
   },
   "devDependencies": {

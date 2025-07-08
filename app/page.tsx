@@ -1,7 +1,10 @@
+import { redirect } from "next/navigation";
+
 export const metadata = {
   title: "App Router",
 };
 
 export default function Page() {
-  return <h1>App Router</h1>;
+  // redirect to home page
+  redirect('/home');
 }
