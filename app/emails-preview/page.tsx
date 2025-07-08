@@ -6,6 +6,8 @@ import StripeWelcomeEmail from '../react-email-starter/emails/stripe-welcome';
 import PlaidVerifyIdentityEmail from '../react-email-starter/emails/plaid-verify-identity';
 import VercelInviteUserEmail from '../react-email-starter/emails/vercel-invite-user';
 import SummerDealsEmail from '../react-email-starter/emails/summer-deals';
+import { createRoot } from 'react-dom/client';
+import ReactDOMServer from 'react-dom/server';
 
 const EmailPreviewPage = () => {
     const [selectedEmail, setSelectedEmail] = useState<number | null>(null);
@@ -64,7 +66,7 @@ const EmailPreviewPage = () => {
                         </h2>
                         <p style={emailDescriptionStyle}>{email.description}</p>
                         <div style={emailPreviewStyle}>
-                            {email.component}
+                            <EmailPreviewSandbox email={email} />
                         </div>
                     </div>
                 ))}
@@ -80,6 +82,31 @@ const EmailPreviewPage = () => {
     );
 };
 
+const EmailPreviewSandbox: React.FC<{
+    email: { name: string; component: React.ReactNode };
+}> = ({ email }) => {
+    const [iframeContent, setIframeContent] = useState<string>('');
+
+    React.useEffect(() => {
+        const htmlString = ReactDOMServer.renderToString(email.component);
+        setIframeContent(htmlString);
+    }, [email]);
+
+    return (
+        <iframe
+            srcDoc={`<!DOCTYPE html><html><head><meta charset="UTF-8" /><title>${email.name}</title></head><body>${iframeContent}</body></html>`}
+            style={{
+                border: 'none',
+                width: '100%',
+                height: '100%',
+                minHeight: '900px',
+                overflow: 'auto'
+            }}
+            title={`${email.name} Preview`}
+        />
+    );
+};
+
 const EmailPreviewModal: React.FC<{
     closeModal: () => void;
     email: { name: string; component: React.ReactNode };
@@ -92,7 +119,7 @@ const EmailPreviewModal: React.FC<{
                     <button style={closeButtonStyle} onClick={closeModal}>✕</button>
                 </div>
                 <div style={modalBodyStyle}>
-                    {email.component}
+                    <EmailPreviewSandbox email={email} />
                 </div>
             </div>
         </div>
@@ -161,7 +188,7 @@ const emailPreviewStyle: React.CSSProperties = {
     padding: '10px',
     backgroundColor: '#f9f9f9',
     overflow: 'auto',
-    maxHeight: '600px'
+    maxHeight: '800px'
 };
 
 // Modal styles
@@ -179,7 +206,7 @@ const modalOverlayStyle: React.CSSProperties = {
 };
 
 const modalContentStyle: React.CSSProperties = {
-    width: '720px',
+    width: '1000px',
     backgroundColor: 'white',
     borderRadius: '8px',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
