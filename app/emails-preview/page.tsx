@@ -71,26 +71,30 @@ const EmailPreviewPage = () => {
             </div>
 
             {selectedEmail !== null && (
-                <div key={selectedEmail} style={modalOverlayStyle} onClick={closeModal}>
-                    <div
-                        style={modalContentStyle}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div style={modalHeaderStyle}>
-                            <h2 style={modalTitleStyle}>{emails[selectedEmail].name}</h2>
-                            <button
-                                style={closeButtonStyle}
-                                onClick={closeModal}
-                            >
-                                ✕
-                            </button>
-                        </div>
-                        <div style={modalBodyStyle}>
-                            {emails[selectedEmail].component}
-                        </div>
-                    </div>
-                </div>
+                <EmailPreviewModal
+                    closeModal={closeModal}
+                    email={emails[selectedEmail]}
+                />
             )}
+        </div>
+    );
+};
+
+const EmailPreviewModal: React.FC<{
+    closeModal: () => void;
+    email: { name: string; component: React.ReactNode };
+}> = ({ closeModal, email }) => {
+    return (
+        <div style={modalOverlayStyle} onClick={closeModal}>
+            <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+                <div style={modalHeaderStyle}>
+                    <h2 style={modalTitleStyle}>{email.name}</h2>
+                    <button style={closeButtonStyle} onClick={closeModal}>✕</button>
+                </div>
+                <div style={modalBodyStyle}>
+                    {email.component}
+                </div>
+            </div>
         </div>
     );
 };
