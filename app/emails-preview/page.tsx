@@ -3,6 +3,7 @@ import NotionMagicLinkEmail from '../react-email-starter/emails/notion-magic-lin
 import StripeWelcomeEmail from '../react-email-starter/emails/stripe-welcome';
 import PlaidVerifyIdentityEmail from '../react-email-starter/emails/plaid-verify-identity';
 import VercelInviteUserEmail from '../react-email-starter/emails/vercel-invite-user';
+import SummerDealsEmail from '../react-email-starter/emails/summer-deals';
 
 const EmailPreviewPage = () => {
     const emails = [
@@ -25,6 +26,11 @@ const EmailPreviewPage = () => {
             name: 'Vercel Invite User',
             component: <VercelInviteUserEmail {...VercelInviteUserEmail.PreviewProps} />,
             description: 'Team invitation email for Vercel'
+        },
+        {
+            name: 'Summer Deals',
+            component: <SummerDealsEmail {...SummerDealsEmail.PreviewProps} />,
+            description: 'Summer promotional email with deals and discounts'
         }
     ];
 
